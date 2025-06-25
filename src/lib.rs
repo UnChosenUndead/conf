@@ -19,6 +19,11 @@ pub struct DBConf {
     pub pg_db_host: String,
 }
 
+#[derive(Serialize, Deserialize)]
+struct ReqStruct {
+    app_name: String,
+}
+
 impl Conf {
     pub async fn get_config(app_name: String) -> Result<Conf, reqwest::Error> {
         if cfg!(debug_assertions) {
@@ -27,7 +32,7 @@ impl Conf {
                 Err(error) => panic!("cant parse config {}", error),
             }
         } else {
-            match fetch_config_from_server().await {
+            match fetch_config_from_server(app_name).await {
                 Ok(conf) => Ok(conf),
                 Err(error) => panic!("fall at fetch conf from server {}", error),
             }
@@ -35,12 +40,11 @@ impl Conf {
     }
 }
 
-async fn fetch_config_from_server() -> Result<Conf, Error> {
+async fn fetch_config_from_server(app_name: String) -> Result<Conf, Error> {
     let client = reqwest::Client::new();
-
     let response: Conf = client
-        .post("http://localhost:3030/mystruct")
-        .json(&Conf::default())
+        .post("http://localhost:20200/conf")
+        .json(&ReqStruct { app_name })
         .send()
         .await?
         .json()
