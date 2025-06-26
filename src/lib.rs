@@ -5,6 +5,9 @@ use serde::{Deserialize, Serialize};
 pub struct Conf {
     pub pg_db_connection_port: String,
     pub pg_db_host: String,
+    pub pg_db_name: String,
+    pub pg_db_username: String,
+    pub pg_db_password: String,
     pub port: String,
     pub host: String,
 }
@@ -66,6 +69,9 @@ mod tests {
             host: "test".to_string(),
             pg_db_connection_port: "test".to_string(),
             pg_db_host: "test".to_string(),
+            pg_db_name: "test".to_string(),
+            pg_db_password: "test".to_string(),
+            pg_db_username: "test".to_string(),
         }
     }
 
