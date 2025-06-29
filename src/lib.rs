@@ -14,7 +14,7 @@ pub struct Conf {
 
 #[derive(Serialize, Deserialize)]
 pub struct ReqConfStruct {
-    app_name: String,
+    pub app_name: String,
 }
 
 pub fn testetset() {
