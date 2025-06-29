@@ -17,13 +17,6 @@ pub struct ReqConfStruct {
     pub app_name: String,
 }
 
-pub fn testetset() {
-    dotenv().ok();
-
-    let x: Conf = envy::from_env().unwrap();
-    println!("{:?}", x)
-}
-
 pub async fn get_config(app_name: String) -> Result<Conf, reqwest::Error> {
     let formated_app_name = format!("{}_", app_name.to_uppercase());
     if cfg!(debug_assertions) {
@@ -83,7 +76,6 @@ mod tests {
             port: 20200,
             ..Default::default()
         };
-        println!("{}", response_body);
         let mut server = mockito::Server::new_with_opts(opts);
 
         let _mock = server
