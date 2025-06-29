@@ -13,7 +13,7 @@ pub struct Conf {
 }
 
 #[derive(Serialize, Deserialize)]
-struct ReqStruct {
+pub struct ReqConfStruct {
     app_name: String,
 }
 
@@ -45,7 +45,7 @@ async fn fetch_config_from_server(app_name: String) -> Result<Conf, Error> {
     let response: Conf = client
         .post("http://127.0.0.1:20200/conf")
         .header("content-type", "application/json")
-        .json(&ReqStruct { app_name })
+        .json(&ReqConfStruct { app_name })
         .send()
         .await
         .unwrap()
@@ -59,7 +59,7 @@ async fn fetch_config_from_server(app_name: String) -> Result<Conf, Error> {
 #[cfg(test)]
 mod tests {
 
-    use crate::{Conf, ReqStruct, fetch_config_from_server, get_config};
+    use crate::{Conf, ReqConfStruct, fetch_config_from_server, get_config};
     use mockito::Matcher::Json;
     use serde_json::json;
 
@@ -88,7 +88,7 @@ mod tests {
 
         let _mock = server
             .mock("POST", "/conf")
-            .match_body(Json(json!(ReqStruct {
+            .match_body(Json(json!(ReqConfStruct {
                 app_name: "test".to_string()
             })))
             .match_header("content-type", "application/json")
