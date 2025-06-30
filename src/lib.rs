@@ -49,6 +49,18 @@ async fn fetch_config_from_server(app_name: String) -> Result<Conf, Error> {
     Ok(response)
 }
 
+pub fn init_conf_service() -> Conf {
+    Conf {
+        port: "14200".to_string(),
+        host: "127.0.0.1".to_string(),
+        pg_db_connection_port: "15500".to_string(),
+        pg_db_host: "127.0.0.1".to_string(),
+        pg_db_name: "conf".to_string(),
+        pg_db_password: "postgres".to_string(),
+        pg_db_username: "postgres".to_string(),
+    }
+}
+
 #[cfg(test)]
 mod tests {
 
