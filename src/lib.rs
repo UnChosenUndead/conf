@@ -1,7 +1,7 @@
 use dotenv::dotenv;
 use reqwest::Error;
 use serde::{Deserialize, Serialize};
-#[derive(Serialize, Deserialize, PartialEq, Debug, Default, Clone, Copy)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Default, Clone)]
 pub struct Conf {
     pub pg_db_port: String,
     pub pg_db_host: String,
