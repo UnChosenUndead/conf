@@ -1,14 +1,14 @@
 use dotenv::dotenv;
 use reqwest::Error;
 use serde::{Deserialize, Serialize};
-#[derive(Serialize, Deserialize, PartialEq, Debug, Default, Clone)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Default, Clone, Copy)]
 pub struct Conf {
     pub pg_db_port: String,
     pub pg_db_host: String,
     pub pg_db_name: String,
     pub pg_db_username: String,
     pub pg_db_password: String,
-    pub port: u16,
+    pub port: String,
     pub host: String,
 }
 
@@ -51,7 +51,7 @@ async fn fetch_config_from_server(app_name: String) -> Result<Conf, Error> {
 
 pub fn init_conf_service() -> Conf {
     Conf {
-        port: 14200,
+        port: "14200".to_string(),
         host: "127.0.0.1".to_string(),
         pg_db_port: "15500".to_string(),
         pg_db_host: "127.0.0.1".to_string(),
@@ -70,7 +70,7 @@ mod tests {
 
     fn init_test_conf() -> Conf {
         Conf {
-            port: 11,
+            port: "11".to_string(),
             host: "test".to_string(),
             pg_db_port: "test".to_string(),
             pg_db_host: "test".to_string(),
