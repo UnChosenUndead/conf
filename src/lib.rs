@@ -3,7 +3,7 @@ use reqwest::Error;
 use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Default)]
 pub struct Conf {
-    pub pg_db_connection_port: String,
+    pub pg_db_port: String,
     pub pg_db_host: String,
     pub pg_db_name: String,
     pub pg_db_username: String,
@@ -53,7 +53,7 @@ pub fn init_conf_service() -> Conf {
     Conf {
         port: "14200".to_string(),
         host: "127.0.0.1".to_string(),
-        pg_db_connection_port: "15500".to_string(),
+        pg_db_port: "15500".to_string(),
         pg_db_host: "127.0.0.1".to_string(),
         pg_db_name: "conf".to_string(),
         pg_db_password: "postgres".to_string(),
@@ -72,7 +72,7 @@ mod tests {
         Conf {
             port: "test".to_string(),
             host: "test".to_string(),
-            pg_db_connection_port: "test".to_string(),
+            pg_db_port: "test".to_string(),
             pg_db_host: "test".to_string(),
             pg_db_name: "test".to_string(),
             pg_db_password: "test".to_string(),
